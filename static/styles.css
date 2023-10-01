@@ -1,0 +1,22 @@
+/* styles.css */
+h1 {
+  font-family: system-ui;
+}
+
+body {
+  font-family: system-ui;
+}
+
+.feed {
+  line-height: 1.1;
+}
+
+.entry {
+  padding: 2px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr)); /* Adjust the minmax values as needed */
+  gap: 40px; /* Adjust the gap between grid items */
+}

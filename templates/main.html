@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <title>
+      {{.Title}}
+    </title>
+  </head>
+  <body>
+    <h1>{{.Title}}</h1>
+    <main>
+      {{range $feed := .Body}}
+        <div class="feed">
+          <h1>{{$feed.Title}}</h1>
+            {{range $item := $feed.Items}}
+            <div class="entry">
+              <a href="{{$item.Link}}">{{$item.Title}}</a>
+              {{if $item.Comments}}
+                &nbsp;&nbsp;
+                <a href="{{$item.Comments}}">[Comments]</a>
+              {{end}}
+            </div>
+            {{end}}
+        </div>
+      {{end}}
+    </main>
+  </body>
+</html>
