@@ -1,0 +1,6 @@
+FROM golang:latest
+WORKDIR /app
+COPY . /app
+RUN go build -o stupid-news .
+EXPOSE 3000
+CMD ["./stupid-news"]

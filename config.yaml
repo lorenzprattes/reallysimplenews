@@ -1,4 +1,4 @@
-Port: 80
+Port: 3000
 SiteTitle: 'Stupid Fucking News'
 FeedURLs: 
 - 'https://hnrss.org/frontpage'
