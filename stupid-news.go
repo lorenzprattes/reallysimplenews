@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -12,6 +13,7 @@ import (
 )
 
 type Config struct {
+	Port      int      `yaml:"Port"`
 	SiteTitle string   `yaml:"SiteTitle"`
 	FeedURLs  []string `yaml:"FeedURLs"`
 	Num_items int      `yaml:"Num_items"`
@@ -49,15 +51,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "3000"
-	}
 	config = loadConfig()
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", indexHandler)
-	http.ListenAndServe(":"+port, nil)
+	err := http.ListenAndServe(fmt.Sprintf(":%d", config.Port), nil)
+	fmt.Println(err)
 }
 
 func getFeeds() []Feed {
