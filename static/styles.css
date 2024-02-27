@@ -20,3 +20,14 @@ main {
   grid-template-columns: repeat(auto-fill, minmax(300px, 2fr)); /* Adjust the minmax values as needed */
   gap: 40px; /* Adjust the gap between grid items */
 }
+
+.over {
+  border: 2px dashed #000;
+}
+
+.draggable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 2fr));
+  gap: 10px;
+  width: 100%;
+}

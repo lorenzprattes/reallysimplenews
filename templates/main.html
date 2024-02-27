@@ -1,6 +1,11 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <script type="text/javascript">
+      var globalItems = {{.Links}};
+      console.log(globalItems);
+    </script>
+    <script src="/static/js/main.js"></script>
     <title>
       {{.Title}}
     </title>
@@ -23,5 +28,15 @@
         </div>
       {{end}}
     </main>
+    <template id="feed-template">
+      <div class="feed" id=${id}>
+        <h1>${title}</h1>
+      </div>
+    </template>
+    <template id="entry-template">
+      <div class="entry" id=${id}>
+        <a href=${link}>${title}</a>
+      </div>
+    </template>
   </body>
 </html>

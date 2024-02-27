@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <script src="/static/js/edit.js"></script>
+    <title>
+      Edit
+    </title>
+  </head>
+  <body>
+    <h1>Edit feeds</h1>
+      <div class="draggable-grid">
+          {{range $feed := .Body}}
+            <div class="draggable-item" draggable="true">{{$feed.Title}}</div>
+          {{end}}
+          <button id="add-item">+</button>
+      </div>
+  </body>
+</html>
