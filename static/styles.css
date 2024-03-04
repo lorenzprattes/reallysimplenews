@@ -21,13 +21,49 @@ main {
   gap: 40px; /* Adjust the gap between grid items */
 }
 
-.over {
+.draggable-item.over {
   border: 2px dashed #000;
+}
+
+.edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000; 
+  text-align: center;
 }
 
 .draggable-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 2fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 4fr));
   gap: 10px;
   width: 100%;
+}
+
+.draggable-item {
+  display: grid;
+  grid-template-rows: auto 1fr; /* Create two row tracks: top for content, bottom for link */
+  padding: 10px; 
+  line-height: 1.5;
+  border: 2px solid transparent; 
+}
+
+.edit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 4fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.pseudo-button {
+  cursor: pointer; /* Changes the cursor to indicate it's clickable */
+  transition: background-color 0.3s;
+}
+
+.pseudo-button:hover {
+  background-color: #b8b8b8; /* Darker shade when hovered */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }

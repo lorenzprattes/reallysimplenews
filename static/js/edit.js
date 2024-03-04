@@ -27,9 +27,21 @@ function handleDrop(e) {
 
   if (e.target.classList.contains("draggable-item")) {
     var toExchange = draggedElement.innerHTML
+    var toExchangeLink1 = draggedElement.querySelector('a').href;
+    var toExchangeLink2 = this.querySelector('a').href;
+    console.log(toExchangeLink1, toExchangeLink2);
+    var toSend = toExchangeLink1 + toExchangeLink2;
+    console.log(toSend);
+    fetch('http://localhost:3000/changeorder', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+    body: toSend
+    })
     draggedElement.innerHTML = this.innerHTML;
     this.innerHTML = toExchange;
-    //e.target.classList.remove("over");
+
   }
 }
 
@@ -48,12 +60,10 @@ function handleDragExit(e) {
 }
 
 function handleAddItem(e) {
-  //creates a popup that asks for the name of the new item and validates it
   let newLink = prompt("Enter the link to the new feed");
   if (newLink === null || newLink === "") {
     return;
   }
-  const data = { newLink }; 
   fetch('http://localhost:3000/addlink', {
   method: 'POST', // or 'PUT'
   headers: {
@@ -67,6 +77,12 @@ function handleAddItem(e) {
 }
 
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 
 function addEventListeners() {
   let items = document.querySelectorAll('.draggable-item');
@@ -78,9 +94,43 @@ function addEventListeners() {
     item.addEventListener('drop', handleDrop, false);
     item.addEventListener('dragend', handleDragEnd, false);
     item.addEventListener('dragend', handleDragExit, false);
-
   });
 
+  deleteZone = document.getElementById('delete-zone');
+
+  if (deleteZone) {
+    console.log('Element found:', deleteZone);
+  } else {
+    console.log('Element not found');
+  }
+  deleteZone.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      deleteZone.style.backgroundColor = '#FFCCCB';
+  });
+
+  deleteZone.addEventListener('dragleave', (event) => {
+    deleteZone.style.backgroundColor = ''; // Reset visual feedback
+  });
+
+  deleteZone.addEventListener('drop', (event) => {
+    event.preventDefault(); // Prevent default behavior
+    deleteZone.style.backgroundColor = ''; // Reset visual feedback
+    var link = draggedElement.querySelector('a').href;
+    draggedElement.parentNode.removeChild(draggedElement);
+
+    console.log(getCookie("feeds"));
+    fetch('http://localhost:3000/removelink', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+      body: link
+      }).then(response => {
+        if (!response.ok) { // If response is not ok, throw an error
+          alert("Link not valid or already exists");
+        }})
+    //dropZone.appendChild(document.getElementById(data));
+  });
   const addItemButton = document.getElementById('add-item');
   addItemButton.addEventListener('click', handleAddItem, false);
 }
