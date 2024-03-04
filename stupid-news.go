@@ -87,9 +87,7 @@ func addLinkToCookies(w http.ResponseWriter, r *http.Request, link string) error
 	}
 	for _, l := range links {
 		if l == link {
-			//TODO disabled temporarily
-			fmt.Print("")
-			//return errors.New("link already exists in feeds")
+			return errors.New("link already exists in feeds")
 		}
 	}
 
@@ -181,13 +179,13 @@ func checkLink(link string) (string, error) {
 func getPostContents(w http.ResponseWriter, r *http.Request) (string, error) {
 	if r.Method != "POST" {
 		http.Error(w, "Method is not supported.", http.StatusMethodNotAllowed)
-		return "", errors.New("Method is not supported.")
+		return "", errors.New("method is not supported")
 	}
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		http.Error(w, "Error reading request body", http.StatusInternalServerError)
 		fmt.Println("Error reading request body")
-		return "", errors.New("Error reading request body")
+		return "", errors.New("error reading request body")
 	}
 	defer r.Body.Close()
 	receivedText := string(body)

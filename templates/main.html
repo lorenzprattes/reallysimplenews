@@ -11,7 +11,10 @@
     </title>
   </head>
   <body>
-    <h1>{{.Title}}</h1>
+    <div class="title-container">
+      <h1>{{.Title}}</h1>
+      <a href="/edit" class="title-link">Edit</a>
+    </div>
     <main>
       {{range $feed := .Body}}
         <div class="feed">

@@ -67,3 +67,14 @@ main {
 *, *::before, *::after {
   box-sizing: border-box;
 }
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+h1, .title-link {
+  margin: 0;
+}
