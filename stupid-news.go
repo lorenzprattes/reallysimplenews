@@ -63,10 +63,12 @@ func initLinksFromCookies(w http.ResponseWriter, r *http.Request) ([]string, err
 		}
 
 		cookie := http.Cookie{
-			Name:    "feeds",
-			Value:   url.QueryEscape(string(jsonArray)),
-			Path:    "/",
-			Expires: time.Now().Add(24 * time.Hour * 399), // Expire in 1 day
+			Name:     "feeds",
+			Value:    url.QueryEscape(string(jsonArray)),
+			Path:     "/",
+			HttpOnly: true,
+			SameSite: http.SameSiteLaxMode,
+			Expires:  time.Now().Add(24 * time.Hour * 399), // Expire in 1 day
 		}
 		http.SetCookie(w, &cookie)
 		links = config.FeedURLs
@@ -101,10 +103,12 @@ func addLinkToCookies(w http.ResponseWriter, r *http.Request, link string) error
 		return err
 	}
 	cookie := http.Cookie{
-		Name:    "feeds",
-		Value:   url.QueryEscape(string(jsonArray)),
-		Path:    "/",
-		Expires: time.Now().Add(24 * time.Hour * 399),
+		Name:     "feeds",
+		Value:    url.QueryEscape(string(jsonArray)),
+		Path:     "/",
+		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+		Expires:  time.Now().Add(24 * time.Hour * 399),
 	}
 	http.SetCookie(w, &cookie)
 	return nil
@@ -239,10 +243,12 @@ func removeLinkHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	cookie := http.Cookie{
-		Name:    "feeds",
-		Value:   url.QueryEscape(string(jsonArray)),
-		Path:    "/",
-		Expires: time.Now().Add(24 * time.Hour * 399),
+		Name:     "feeds",
+		Value:    url.QueryEscape(string(jsonArray)),
+		Path:     "/",
+		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+		Expires:  time.Now().Add(24 * time.Hour * 399),
 	}
 	http.SetCookie(w, &cookie)
 }
@@ -295,10 +301,12 @@ func changeOrderHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	cookie := http.Cookie{
-		Name:    "feeds",
-		Value:   url.QueryEscape(string(jsonArray)),
-		Path:    "/",
-		Expires: time.Now().Add(24 * time.Hour * 399),
+		Name:     "feeds",
+		Value:    url.QueryEscape(string(jsonArray)),
+		Path:     "/",
+		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+		Expires:  time.Now().Add(24 * time.Hour * 399),
 	}
 	http.SetCookie(w, &cookie)
 }
