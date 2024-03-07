@@ -5,7 +5,6 @@
       var globalItems = {{.Links}};
       console.log(globalItems);
     </script>
-    <script src="/static/js/main.js"></script>
     <title>
       {{.Title}}
     </title>
@@ -13,33 +12,26 @@
   <body>
     <div class="title-container">
       <h1>{{.Title}}</h1>
-      <a href="/edit" class="title-link">Edit</a>
+      <a href="/edit" class="title-link">Edit  </a>
     </div>
-    <main>
-      {{range $feed := .Body}}
-        <div class="feed">
-          <h1>{{$feed.Title}}</h1>
-            {{range $item := $feed.Items}}
-            <div class="entry">
-              <a href="{{$item.Link}}">{{$item.Title}}</a>
-              {{if $item.Comments}}
-                &nbsp;&nbsp;
-                <a href="{{$item.Comments}}">[Comments]</a>
+    <div class="all-but-footer">
+      <main>
+        {{range $feed := .Body}}
+          <div class="feed">
+            <h1>{{$feed.Title}}</h1>
+              {{range $item := $feed.Items}}
+              <div class="entry">
+                <a href="{{$item.Link}}">{{$item.Title}}</a>
+                {{if $item.Comments}}
+                  &nbsp;&nbsp;
+                  <a href="{{$item.Comments}}">[Comments]</a>
+                {{end}}
+              </div>
               {{end}}
-            </div>
-            {{end}}
-        </div>
-      {{end}}
-    </main>
-    <template id="feed-template">
-      <div class="feed" id=${id}>
-        <h1>${title}</h1>
-      </div>
-    </template>
-    <template id="entry-template">
-      <div class="entry" id=${id}>
-        <a href=${link}>${title}</a>
-      </div>
-    </template>
+          </div>
+        {{end}}
+      </main>
+    </div>
+    {{ template "footer.html" . }}
   </body>
 </html>

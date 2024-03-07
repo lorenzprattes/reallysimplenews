@@ -64,8 +64,8 @@ func initLinksFromCookies(w http.ResponseWriter, r *http.Request) ([]string, err
 			Path:    "/",
 			Expires: time.Now().Add(24 * time.Hour * 399), // Expire in 1 day
 		}
-
 		http.SetCookie(w, &cookie)
+		links = config.FeedURLs
 	} else {
 		jsonArray, err := url.QueryUnescape(cookie_read.Value)
 		if err != nil {
@@ -113,7 +113,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	t, err := template.ParseFiles("templates/main.html")
+	t, err := template.ParseFiles("templates/main.html", "templates/footer.html")
 	if err != nil {
 		panic(err)
 	}
@@ -132,7 +132,7 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	t, err := template.ParseFiles("templates/edit.html")
+	t, err := template.ParseFiles("templates/edit.html", "templates/footer.html")
 	if err != nil {
 		panic(err)
 	}

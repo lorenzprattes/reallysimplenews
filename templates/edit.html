@@ -7,37 +7,39 @@
     </title>
   </head>
   <body>
-    <div class="title-container">
-      <h1>Edit feeds</h1>
-      <a href="/" class="title-link">Home</a>
-    </div>
-    <div class="edit-grid">
-      <div id="add-item" class="edit pseudo-button">
-        <p>
-          &plus;
-          <br>
-          Add feed
-        </p>
+    <div class="all-but-footer">
+      <div class="title-container">
+        <h1>Edit feeds</h1>
+        <a href="/" class="title-link">Home</a>
       </div>
-      <div id="delete-zone" class="edit">
-        <p>
-          &#128465
-          <br>
-          Drop here to delete
-        </p>
+      <div class="edit-grid">
+        <div id="add-item" class="edit pseudo-button">
+          <p>
+            &plus;
+            <br>
+            Add feed
+          </p>
+        </div>
+        <div id="delete-zone" class="edit">
+          <p>
+            &#128465
+            <br>
+            Drop here to remove
+          </p>
+        </div>
       </div>
-    </div>
-    <br>
-    <br>
-
+      <br>
+      <br>
       <div class="draggable-grid">
           {{range $feed := .Body}}
             <div class="draggable-item" draggable="true">
               {{$feed.Title}}
-                <a href="{{$feed.Link}}" style="align-self: end;" draggable="false">{{$feed.Link}}</a>
+              <a href="{{$feed.Link}}" style="align-self: end;" draggable="false">{{$feed.Link}}</a>
             </div>
             
           {{end}}
       </div>
+    </div>
+    {{ template "footer.html" . }}
   </body>
 </html>

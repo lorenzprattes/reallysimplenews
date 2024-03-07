@@ -5,6 +5,14 @@ h1 {
 
 body {
   font-family: system-ui;
+  min-height: 100vh;
+  margin:0;
+  display:flex;
+  flex-direction:column; 
+}
+
+.all-but-footer {
+  flex:1;
 }
 
 .feed {
@@ -16,6 +24,8 @@ body {
 }
 
 main {
+  margin-right: 10px;
+  margin-left: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 2fr)); /* Adjust the minmax values as needed */
   gap: 40px; /* Adjust the gap between grid items */
@@ -38,6 +48,8 @@ main {
   grid-template-columns: repeat(auto-fill, minmax(300px, 4fr));
   gap: 10px;
   width: 100%;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .draggable-item {
@@ -49,6 +61,8 @@ main {
 }
 
 .edit-grid {
+  margin-right: 10px;
+  margin-left: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 4fr));
   gap: 10px;
@@ -73,6 +87,8 @@ main {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 h1, .title-link {
