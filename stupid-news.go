@@ -48,6 +48,10 @@ var client = http.Client{
 	Timeout: 2 * time.Second,
 }
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
 func initLinksFromCookies(w http.ResponseWriter, r *http.Request) ([]string, error) {
 	var links []string
 	cookie_read, err := r.Cookie("feeds")
@@ -107,6 +111,7 @@ func addLinkToCookies(w http.ResponseWriter, r *http.Request, link string) error
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	links, err := initLinksFromCookies(w, r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -126,6 +131,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func editHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	links, err := initLinksFromCookies(w, r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -194,6 +200,7 @@ func getPostContents(w http.ResponseWriter, r *http.Request) (string, error) {
 }
 
 func addLinkHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	receivedText, err := getPostContents(w, r)
 	if err != nil {
 		return
@@ -210,6 +217,7 @@ func addLinkHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func removeLinkHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	receivedText, err := getPostContents(w, r)
 	if err != nil {
 		return
@@ -240,6 +248,7 @@ func removeLinkHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func changeOrderHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	receivedText, err := getPostContents(w, r)
 	if err != nil {
 		return
