@@ -1,0 +1,22 @@
+{
+  "name": "Node.js React Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+    },
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/zsh"
+    }
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind",
+    "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind",
+    "source=${localEnv:HOME}/.zshrc,target=/root/.zshrc,type=bind",
+    "source=${localEnv:HOME}/.zshrc.local,target=/root/.zshrc.local,type=bind"
+  ],
+  "forwardPorts": [3000],
+  "remoteUser": "root"
+}
